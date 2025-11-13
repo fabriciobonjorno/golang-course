@@ -53,6 +53,11 @@ func main() {
 	for _, p := range products {
 		fmt.Printf("Product ID: %s, Name: %s, Price: %.2f\n", p.ID, p.Name, p.Price)
 	}
+
+	err = deleteProduct(db, product.ID)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func insertProduct(db *sql.DB, product *Product) error {
