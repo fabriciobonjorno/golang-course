@@ -76,7 +76,6 @@ func handleCotacao(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		return
 	}
 
-	// Timeout de 10ms para escrita no banco
 	ctxDB, cancelDB := context.WithTimeout(context.Background(), 10*time.Millisecond)
 	defer cancelDB()
 
@@ -85,7 +84,6 @@ func handleCotacao(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		log.Println("Erro ao salvar no banco (timeout provável):", err)
 	}
 
-	// Retorno JSON para o cliente
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]string{
 		"bid": result.USDBRL.Bid,
