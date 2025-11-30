@@ -5,7 +5,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-var cfg *conf
+// is possible use var cfg *conf ouside LoadConfig to avoid reloading config every time
 
 // conf holds the application configuration
 type conf struct {
@@ -23,6 +23,8 @@ type conf struct {
 
 // LoadConfig loads configuration from file and environment variables, use viper package to manage configs
 func LoadConfig(path string) (*conf, error) {
+	// is possible use var cfg *conf to avoid reloading config every time
+	var cfg *conf
 	viper.SetConfigName("app_config")
 	viper.SetConfigType("env")
 	viper.AddConfigPath(path)
@@ -42,5 +44,5 @@ func LoadConfig(path string) (*conf, error) {
 	// Initialize JWT authentication
 	cfg.TokenAuth = jwtauth.New("HS256", []byte(cfg.JWTSecret), nil)
 
-	return cfg, nil
+	return cfg, err
 }
