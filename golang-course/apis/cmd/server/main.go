@@ -29,6 +29,9 @@ func main() {
 	productDB := database.NewProduct(db)
 	productHandler := handlers.NewProductHandler(productDB) // Create ProductHandler
 
+	userDB := database.NewUser(db)
+	userHandler := handlers.NewUserHandlers(userDB)
+
 	// using Chi router or any other router of your choice
 	r := chi.NewRouter()
 
@@ -41,6 +44,8 @@ func main() {
 	r.Get("/products", productHandler.GetProducts)
 	r.Put("/products/{id}", productHandler.UpdateProduct)
 	r.Delete("/products/{id}", productHandler.DeleteProduct)
+
+	r.Post("/users", userHandler.CreateUser)
 
 	http.ListenAndServe(":8000", r)
 
