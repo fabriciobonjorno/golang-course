@@ -31,13 +31,19 @@ func main() {
 	productHandler := handlers.NewProductHandler(productDB) // Create ProductHandler
 
 	userDB := database.NewUser(db)
-	userHandler := handlers.NewUserHandlers(userDB, configs.TokenAuth, configs.JWTExpiresIn) // add jwt an expiration on user EP
+	userHandler := handlers.NewUserHandlers(userDB)
 
 	// using Chi router or any other router of your choice
 	r := chi.NewRouter()
 
 	// logs all requests
 	r.Use(middleware.Logger)
+	r.Use(middleware.Recoverer)
+	r.Use(middleware.WithValue("jwt", configs.TokenAuth))
+	r.Use(middleware.WithValue("jwtExpireIn", configs.JWTExpiresIn))
+
+	// Log Middleware example
+	// r.Use(LogRequest)
 
 	// Products routes
 	r.Route("/products", func(r chi.Router) {
@@ -61,3 +67,10 @@ func main() {
 
 	// http.ListenAndServe(":8000", nil)
 }
+
+// func LogRequest(next http.Handler) http.Handler {
+// 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+// 		log.Printf("Request: %s %s", r.Method, r.URL.Path)
+// 		next.ServeHTTP(w, r)
+// 	})
+// }
