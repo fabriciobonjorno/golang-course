@@ -39,19 +39,19 @@ func TestFindAllProducts(t *testing.T) {
 
 	}
 	productDB := NewProduct(db)
-	products, err := productDB.FindAll(1, 10, "asc")
+	products, _, err := productDB.FindAll(1, 10, "asc")
 	assert.NoError(t, err)
 	assert.Len(t, products, 10)
 	assert.Equal(t, "Product 1", products[0].Name)
 	assert.Equal(t, "Product 10", products[9].Name)
 
-	products, err = productDB.FindAll(2, 10, "asc")
+	products, _, err = productDB.FindAll(2, 10, "asc")
 	assert.NoError(t, err)
 	assert.Len(t, products, 10)
 	assert.Equal(t, "Product 11", products[0].Name)
 	assert.Equal(t, "Product 20", products[9].Name)
 
-	products, err = productDB.FindAll(3, 10, "asc")
+	products, _, err = productDB.FindAll(3, 10, "asc")
 	assert.NoError(t, err)
 	assert.Len(t, products, 3)
 	assert.Equal(t, "Product 21", products[0].Name)

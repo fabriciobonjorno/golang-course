@@ -1,0 +1,33 @@
+// Create Product
+POST http://localhost:8000/products HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Sample Product 3",
+  "price": 19.99
+}
+
+// Get Product
+// GET http://localhost:8000/products/{id} HTTP/1.1
+
+GET http://localhost:8000/products/019af000-7f68-7e9e-9720-a5ee4de7695d HTTP/1.1
+Content-Type: application/json
+
+// Update Product
+
+PUT http://localhost:8000/products/019af000-7f68-7e9e-9720-a5ee4de7695d  HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "My Updated Product",
+  "price": 200.00
+}
+
+// Delete Product
+DELETE http://localhost:8000/products/019af000-7f68-7e9e-9720-a5ee4de7695d HTTP/1.1
+Content-Type: application/json
+
+// Get Products
+GET http://localhost:8000/products?page=1&limit=2 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjUyMDkwODUsInN1YiI6IjAxOWFmYjUxLTBkMzEtNzcwNC04ZTI5LWNiNDE5OWNmZDk1YyJ9.t5f9pRKrBYJFGu2dTIFXG44bH5othArtEa0AoRJynyk
